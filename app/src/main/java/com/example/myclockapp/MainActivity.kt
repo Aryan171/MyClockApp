@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -14,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,15 +37,18 @@ class MainActivity : ComponentActivity() {
                 val bottomBarItems = listOf(
                     BottomBarItem(
                         title = "Timer",
-                        icon = Icons.Default.KeyboardArrowDown
+                        icon = Icons.Default.KeyboardArrowDown,
+                        route = Screen.Timer.route
                     ),
                     BottomBarItem(
                         title = "Clock",
-                        icon = Icons.Default.CheckCircle
+                        icon = Icons.Default.CheckCircle,
+                        route = Screen.Clock.route
                     ),
                     BottomBarItem(
                         title = "Stop Watch",
-                        icon = Icons.Default.Home
+                        icon = Icons.Default.Home,
+                        route = Screen.StopWatch.route
                     )
                 )
 
@@ -57,7 +62,12 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    Text("Screen Goes Here", modifier = Modifier.padding(it))
+                    Surface(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(it)
+                    ) {
+                        SetScreen(navController)
+                    }
                 }
             }
         }
@@ -81,6 +91,7 @@ fun BottomBar(
                 selected = i == selectedIndex,
                 onClick = {
                     selectedIndex = i
+                    navController.navigate(bottomBarItems[i].route)
                 },
                 icon = {
                     Icon(
