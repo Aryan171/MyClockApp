@@ -6,4 +6,5 @@ sealed class Screen(
     data object Clock: Screen("clock")
     data object Timer: Screen("timer")
     data object StopWatch: Screen("stopWatch")
+    data object SecondTimerScreen: Screen("secondTimerScreen")
 }
