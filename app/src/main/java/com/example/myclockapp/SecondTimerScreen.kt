@@ -61,7 +61,7 @@ fun SecondTimerScreen(navController: NavHostController, initialSeconds: Int) {
 
     /**t2 stores the time for which the timer was played before last being paused*/
     var t2 by remember {
-        mutableIntStateOf(0)
+        mutableLongStateOf(0L)
     }
 
     /**seconds stores the actual number of seconds for which the timer runs
@@ -179,7 +179,7 @@ fun SecondTimerScreen(navController: NavHostController, initialSeconds: Int) {
                 strokeWidthFraction = 0.05f,
                 color = Color.Red,
                 onClick = {
-                    t2 = 0
+                    t2 = 0L
                     paused = true
                 }
             )
@@ -192,7 +192,7 @@ fun SecondTimerScreen(navController: NavHostController, initialSeconds: Int) {
                     onClick = {
                         seconds = secondsLeft + 60f
                         t1 = System.currentTimeMillis()
-                        t2 = 0
+                        t2 = 0L
                     },
                     modifier = Modifier
                         .weight(1f)
@@ -218,10 +218,10 @@ fun SecondTimerScreen(navController: NavHostController, initialSeconds: Int) {
                             seconds = initialSeconds.toFloat()
                             secondsLeft = initialSeconds.toFloat()
                             t1 = System.currentTimeMillis()
-                            t2 = 0
+                            t2 = 0L
                         }
                         else if(paused) {
-                            t2 += (System.currentTimeMillis() - t1).toInt()
+                            t2 += System.currentTimeMillis() - t1
                         }
                         else {
                             t1 = System.currentTimeMillis()
