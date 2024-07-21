@@ -2,6 +2,8 @@ package com.example.myclockapp
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
@@ -33,11 +36,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,6 +74,13 @@ fun StopWatchScreen() {
     var fractionMarked by remember {
         mutableFloatStateOf(-1f)
     }
+    val buttonSize = animateFloatAsState(
+        targetValue = if(tSpent == 0L) 0f else 1f,
+        animationSpec = tween(
+            durationMillis = 300,
+            easing = LinearOutSlowInEasing
+        )
+    )
 
     val scope = rememberCoroutineScope()
 
@@ -152,6 +165,7 @@ fun StopWatchScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 FilledTonalButton(
+                    modifier = Modifier.scale(buttonSize.value),
                     onClick = {
                         reset()
                     }
@@ -173,19 +187,21 @@ fun StopWatchScreen() {
                     }
                 ) {
                     Icon(
-                        imageVector = if (paused) Icons.Default.PlayArrow else Icons.Default.Menu,
+                        imageVector = if (paused) Icons.Default.PlayArrow
+                        else ImageVector.vectorResource(id = R.drawable.pause_24px),
                         contentDescription = "Play / pause",
                         tint = Color.White
                     )
                 }
 
                 FilledTonalButton(
+                    modifier = Modifier.scale(buttonSize.value),
                     onClick = {
                         addLap()
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Info,
+                        imageVector = ImageVector.vectorResource(id = R.drawable.timer_24px),
                         contentDescription = "lap",
                         tint = Color.White
                     )

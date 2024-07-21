@@ -45,7 +45,9 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -236,9 +238,10 @@ fun SecondTimerScreen(navController: NavHostController, initialSeconds: Int) {
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = if(secondsLeft < 0) Icons.Default.Menu
+                            imageVector =
+                            if(secondsLeft < 0) ImageVector.vectorResource(id = R.drawable.stop_24px)
                             else if(paused) Icons.Default.PlayArrow
-                            else Icons.Default.Close,//change this
+                            else ImageVector.vectorResource(id = R.drawable.pause_24px),
                             contentDescription = "Play / Pause / Reset"
                         )
                     }

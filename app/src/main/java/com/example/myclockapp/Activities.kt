@@ -14,7 +14,7 @@ import androidx.navigation.navArgument
 fun SetScreen(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.StopWatch.route, //Clock.route,
+        startDestination = Screen.Clock.route,
         enterTransition = {
             fadeIn(animationSpec = tween(200))
         },

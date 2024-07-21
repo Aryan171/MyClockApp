@@ -7,10 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -24,6 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.myclockapp.ui.theme.MyClockAppTheme
@@ -37,17 +35,17 @@ class MainActivity : ComponentActivity() {
                 val bottomBarItems = listOf(
                     BottomBarItem(
                         title = "Timer",
-                        icon = Icons.Default.KeyboardArrowDown,
+                        icon = ImageVector.vectorResource(id = R.drawable.hourglass_24px),
                         route = Screen.Timer.route
                     ),
                     BottomBarItem(
                         title = "Clock",
-                        icon = Icons.Default.CheckCircle,
+                        icon = ImageVector.vectorResource(id = R.drawable.schedule_24px),
                         route = Screen.Clock.route
                     ),
                     BottomBarItem(
                         title = "Stop Watch",
-                        icon = Icons.Default.Home,
+                        icon = ImageVector.vectorResource(id = R.drawable.timer_24px),
                         route = Screen.StopWatch.route
                     )
                 )
